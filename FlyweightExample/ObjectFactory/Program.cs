@@ -2,45 +2,58 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using PixelFactory;
-using Rectangle = PixelFactory.Rectangle;
 
 namespace ObjectFactory
 {
     class Program
     {
-        static void Main(string[] args)
+        static readonly List<Rectangle> Rectangles = new List<Rectangle>();
+        static readonly BitmapFactory BitmapFactory = new BitmapFactory();
+        static readonly Random Random = new Random();
+        static readonly Stopwatch Stopwatch = new Stopwatch();
+
+        static void Main()
         {
-            var pixelListFlyweight = new List<Rectangle>();
-            var pixelListNormal = new List<Rectangle>();
+            Console.WriteLine("Flyweight code sample");
+            Console.WriteLine("Please choose what implementation to use");
+            Console.WriteLine("(1) Without flyweight");
+            Console.WriteLine("(2) With flyweight");
+            var choice = Console.ReadLine();
             
-            var myPixelFactory = new PixelFactory.PixelFactory();
+            switch (choice)
+            {
+                case "1":
+                    RunNotUsingFlyweight(250);
+                    break;
+                case "2":
+                    RunUsingFlyweight(250);
+                    break;
+            }
+        }
 
-            var rnd = new Random();
-            var s = new Stopwatch();
+        public static void RunUsingFlyweight(int timesToRun)
+        {
+            Stopwatch.Start();
+            for (int i = 0; i < timesToRun; i++)
+            {
+                var bitmap = BitmapFactory.GetBitmap((PixelColor)Random.Next(3));
+                Rectangles.Add(new Rectangle(bitmap, Random.Next(100), Random.Next(100)));
+            }
+            Stopwatch.Stop();
+            Console.WriteLine(Stopwatch.Elapsed.Milliseconds);
+            Stopwatch.Reset();
+        }
 
-            
-                s.Start();
-                for (int i = 0; i < 260; i++)
-                {
-                    //var bitmap = myPixelFactory.GetBitmap((PixelColor) rnd.Next(3));
-                    //pixelListFlyweight.Add(new Rectangle(bitmap, rnd.Next(100), rnd.Next(100)));
-                    pixelListNormal.Add(new Rectangle(new Bitmap("../../images/red.bmp"), rnd.Next(100), rnd.Next(100)));
-                }
-                s.Stop();
-                //pixelListFlyweight.Clear();
-                //pixelListNormal.Clear();
-                
-                //myPixelFactory.Reset();
-                Console.WriteLine(s.Elapsed.Milliseconds);
-                s.Reset();
-            
-            
-            //Console.WriteLine(myPixelFactory.ObjectsCount);
-            Console.ReadKey();
+        public static void RunNotUsingFlyweight(int timesToRun)
+        {
+            Stopwatch.Start();
+            for (int i = 0; i < timesToRun; i++)
+            {
+                Rectangles.Add(new Rectangle(new Bitmap("../../images/red.bmp"), Random.Next(100), Random.Next(100)));   
+            }
+            Stopwatch.Stop();
+            Console.WriteLine(Stopwatch.Elapsed.Milliseconds);
+            Stopwatch.Reset();
         }
     }
 }
