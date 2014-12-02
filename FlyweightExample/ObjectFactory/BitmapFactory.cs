@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PixelFactory
+namespace ObjectFactory
 {
     public enum PixelColor
     {
@@ -14,21 +10,7 @@ namespace PixelFactory
         Blue
     }
 
-    public class Rectangle
-    {
-        public Bitmap Picture { get; set; }//intrinsic
-        public int X { get; set; }//extrinsic
-        public int Y { get; set; }//extrinsic
-
-        public Rectangle(Bitmap b,int x, int y)
-        {
-            Picture = b;
-            X = x;
-            Y = y;
-        }
-    }
-
-    public class PixelFactory
+    public class BitmapFactory
     {
         public int ObjectsCount = 0;
         private Dictionary<PixelColor, Bitmap> _pixelColors;
@@ -69,10 +51,7 @@ namespace PixelFactory
                         break;
                     }
             }
-
             return _pixelColors[instanceType];
         }
-
     }
-
 }
