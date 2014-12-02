@@ -1,0 +1,279 @@
+\documentclass[a4paper,11pt,openany]{memoir} % Brug openright hvis chapters skal starte på højresider; openany, oneside
+
+%%%% PACKAGES %%%%
+%mulighed for cross reference %
+\usepackage{xr-hyper} 
+\usepackage[hidelinks]{hyperref}
+\externaldocument[con-]{Content}
+
+% PDF COMMENTS
+\usepackage{pdfcomment}
+
+% ¤¤ Oversættelse og tegnsætning ¤¤ %
+\usepackage[ansinew]{inputenc}		% Gør det muligt at bruge æ, ø og å i sine .tex-filer
+\usepackage[english]{babel}			% Dansk sporg, f.eks. tabel, figur og kapitel
+\usepackage[T1]{fontenc}			% Hjælper med orddeling ved æ, ø og å. Sætter fontene til at være ps-fonte, i stedet for bmp					
+\usepackage{latexsym}				% LaTeX symboler
+\usepackage{xcolor,ragged2e,fix-cm}	% Justering af elementer
+\usepackage{pdfpages}				% Gør det muligt at inkludere pdf-dokumenter med kommandoen \includepdf[pages=]{fil.pdf}	
+\pretolerance=2500 					% Gør det muligt at justre afstanden mellem ord (højt tal, mindre orddeling og mere space mellem ord)
+\usepackage{ulem}                   % Gennemstregning af ord med koden \sout{}
+																			
+% ¤¤ Figurer og tabeller – floats  ¤¤ %
+\usepackage{flafter}		% Sørger for at dine floats ikke optræder i teksten før de er sat ind.
+\usepackage{multirow}       % Fletning af rækker
+\usepackage{hhline}         % Dobbelte horisontale linier
+\usepackage{multicol}       % Fletning af kolonner
+\usepackage{here}			% Gør det muligt at placere figurer hvor du vil.   \begin{figure}[!h] % Will not be floating.
+\usepackage{wrapfig}		% Indsættelse af figurer omsvøbt af tekst. \begin{wrapfigure}{Placering}{Størrelse}
+	
+% ¤¤ Matematiske formler og maskinkode ¤¤
+\usepackage{amsmath,amssymb,stmaryrd} 	% Bedre matematik og ekstra fonte
+\usepackage{textcomp}                 	% Adgang til tekstsymboler
+\usepackage{eso-pic}					% Tilføj billedekommandoer på hver side
+\usepackage{enumerate}
+
+
+% ¤¤ PDF og billede optimering ¤¤ % 
+\usepackage{graphicx} 					% Pakke til jpeg/png billeder
+
+% ¤¤ Compact itemize ¤¤ %
+\usepackage{mdwlist}
+
+
+% ¤¤ Referencer, bibtex og url'er ¤¤ %
+\usepackage{url}						% Til at sætte urler op med. Virker sammen med hyperref
+\usepackage[danish]{varioref}			% Giver flere bedre mulighed for at lave krydshenvisninger
+\usepackage[round,authoryear]{natbib}
+
+
+% ¤¤ Floats ¤¤ %
+\let\newfloat\relax 					% Memoir har allerede defineret denne men det gør float pakken også
+\usepackage{float}
+\usepackage{placeins}					% Denne pakke indeholder floatbarrier.
+
+% ¤¤ SVG/EPS includes ¤¤ %
+%\usepackage{svg}						% Kræver også amsmath
+\usepackage{epstopdf}
+
+\usepackage[footnote,draft,danish,silent,nomargin]{fixme}		% Indsæt rettelser og lignende med \fixme{...} Med final i stedet for draft, udløses en error for hver fixme, der ikke er slettet, når rapporten bygges.
+
+%%%% CUSTOM SETTINGS %%%%
+
+% ¤¤ Marginer ¤¤ %
+\setlrmarginsandblock{2.5cm}{2.5cm}{*}	% \setlrmarginsandblock{Indbinding}{Kant}{Ratio}
+\setulmarginsandblock{2.5cm}{2.5cm}{*}	% \setulmarginsandblock{Top}{Bund}{Ratio}
+\checkandfixthelayout 					% Laver forskellige beregninger og sætter de almindelige længder op til brug ikke memoir pakker
+
+%	¤¤ Afsnitsformatering ¤¤ %
+\setlength{\parindent}{0mm}           	% Størrelse af indryk
+\setlength{\parskip}{3mm}          		% Afstand mellem afsnit ved brug af double Enter
+\linespread{1,2}						% Linie afstand
+
+% ¤¤ Indholdsfortegnelse ¤¤ %
+\setsecnumdepth{subsubsection}		 	% Dybden af nummerede overkrifter (part/chapter/section/subsection)
+\maxsecnumdepth{subsubsection}			% Ændring af dokumentklassens grænse for nummereringsdybde
+\settocdepth{subsection} 				% Dybden af indholdsfortegnelsen
+
+% ¤¤ Visuelle referencer ¤¤ %
+%\usepackage[colorlinks]{hyperref}		% LOADES IGENNEM PDFCOMMENT PACKAGE - Giver mulighed for at ens referencer bliver til klikbare hyperlinks. .. [colorlinks]{..} 
+\hypersetup{pdfborder = 0}				% Fjerner ramme omkring links i fx indholsfotegnelsen og ved kildehenvisninger ¤¤
+\hypersetup{							%	Opsætning af hyperlinks
+    colorlinks = false,
+    linkcolor = black,
+    anchorcolor = black,
+    citecolor = black
+}
+
+\definecolor{gray}{gray}{0.80}			% Definerer farven grå
+% Code environment
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{light-gray}{gray}{0.95}
+
+\lstset{frame=none,
+  backgroundcolor=\color{light-gray},
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+%%%%%% header og footer %%%%%%
+\let\footruleskip\undefined 	% allerede defineret af memoir klassen, men redefineres i fancy og skal derfor nulstilles.
+\usepackage{fancyhdr} 			% includerer fancy til at styre header og footer
+
+%definerer vores egen fancy style, som skal være på alle sider.
+\fancypagestyle{IHA-fancy-style}{%
+  \fancyhf{}							% Clear header and footer
+  \fancyhead[RO]{\slshape \rightmark} 	% sections på Right Odd.
+  \fancyhead[LE]{\slshape \leftmark} 	% chapter på Left Even
+  \fancyhead[RE]{ 						% Billede på Right Even.
+     \includegraphics[height=1cm]{images/logo.png}
+  }
+  \fancyfoot[C]{\thepage} 			% Sidenumre på Left Even og Right Odd. 
+  \renewcommand{\headrulewidth}{0.4pt}	% Line at the header visible
+  \renewcommand{\footrulewidth}{0pt}	% Line at the footer visible
+  \setlength{\headheight}{1cm}			% højden på Sidehoveden.
+  \setlength{\headsep}{0.7cm} 			% Seperationen mellem sidehoved og tekst.
+}
+
+% Redefine the plain page style, som bruges på sider med nyt kapitel.
+\fancypagestyle{plain}{%
+  \fancyhf{}							% Clear header and footer
+  \fancyfoot[C]{\thepage} 			% Sidenumre på Left Even og Right Odd.
+  \renewcommand{\headrulewidth}{0pt}	% Line at the header invisible
+  \renewcommand{\footrulewidth}{0pt}	% Line at the footer visible
+}
+
+%vælger stylen IHA fancy Style som er vores egen definerede.
+\pagestyle{IHA-fancy-style}
+
+
+
+% ¤¤ Navngivning ¤¤ %
+\addto\captionsdanish{
+	\renewcommand\appendixname{Appendiks}
+	\renewcommand\contentsname{Indholdsfortegnelse}	
+	\renewcommand\appendixpagename{Appendiks}
+	\renewcommand\cftchaptername{\chaptername~}
+	\renewcommand\cftappendixname{\appendixname~}
+	\renewcommand\appendixtocname{Appendiks}
+}
+
+% ¤¤ Kapiteludssende ¤¤ %
+
+\definecolor{numbercolor}{gray}{0.7}
+\newif\ifchapternonum
+
+\makechapterstyle{jenor}{
+  \renewcommand\printchaptername{}
+  \renewcommand\printchapternum{}
+  \renewcommand\printchapternonum{\chapternonumtrue}
+  \renewcommand\chaptitlefont{\fontfamily{pbk}\fontseries{db}\fontshape{n}\fontsize{25}{35}\selectfont\raggedleft}
+  \renewcommand\chapnumfont{\fontfamily{pbk}\fontseries{m}\fontshape{n}\fontsize{1in}{0in}\selectfont\color{numbercolor}}
+  \renewcommand\printchaptertitle[1]{%
+    \noindent
+    \ifchapternonum
+    \begin{tabularx}{\textwidth}{X}
+    {\let\\\newline\chaptitlefont ##1\par} 
+    \end{tabularx}
+    \par\vskip-2.5mm\hrule
+    \else
+    \begin{tabularx}{\textwidth}{Xl}
+    {\parbox[b]{\linewidth}{\chaptitlefont ##1}} & \raisebox{-15pt}{\chapnumfont \thechapter}
+    \end{tabularx}
+    \par\vskip2mm\hrule
+    \fi
+  }
+}
+\chapterstyle{jenor}
+
+% ¤¤ Fjerner den vertikale afstand mellem listeopstillinger og punktopstillinger ¤¤ %
+\let\olditemize=\itemize							
+\def\itemize{\olditemize\setlength{\itemsep}{-1ex}}
+\let\oldenumerate=\enumerate						
+\def\enumerate{\oldenumerate\setlength{\itemsep}{-1ex}}
+
+% ORDDELING %
+\newsubfloat{figure}
+\hyphenation{hvad hvem hvor MPa kon-se-kvens-klas-se bjæl-ken byg-ning-er e-le-ment brud-li-ni-er frem-løbs-tem-pe-ra-tur-en Bjæl-ker-ne kil-de-lis-te tem-pe-ra-tur-må-ling-re-ne Universitets}
+
+%%%% CUSTOM COMMANDS %%%%
+
+% ¤¤ Billede hack ¤¤ %
+\newcommand{\figur}[3]{
+		\begin{figure}[h] \centering
+			\includegraphics[width=#1\textwidth]{images/#2.eps}
+			\caption{#3}
+			\label{fig:#2}
+		\end{figure} 
+}
+
+%\renewcommand{\figur}[4]{
+%		\begin{figure}[#4] \centering
+%			\includegraphics[width=#1\textwidth]{images/#2}
+%			\caption{#3}\label{fig:#2}
+%		\end{figure} 
+%}
+
+% kapitler og overskrifter %
+\let\oldchapter=\chapter
+\renewcommand{\chapter}[1]{
+	\oldchapter{#1}
+	\label{cha:#1}
+}
+
+\let\oldsection=\section
+\renewcommand{\section}[1]{
+	\oldsection{#1}
+	\label{sec:#1}
+}
+
+\let\oldsubsection=\subsection
+\renewcommand{\subsection}[1]{
+	\oldsubsection{#1}
+	\label{sub:#1}
+}
+
+\let\oldsubsubsection=\subsubsection
+\renewcommand{\subsubsection}[1]{
+	\oldsubsubsection{#1}
+	\label{ssb:#1}
+}
+
+% referencer %
+
+\newcommand{\reffigure}[1]{Figure~\ref{fig:#1}}
+
+\newcommand{\refchapter}[1]{Chapter~\ref{kap:#1}}
+
+\newcommand{\refsection}[1]{Section~\ref{sec:#1}}
+
+\newcommand{\refsubsection}[1]{Section~\ref{sub:#1}}
+
+\newcommand{\refsubsubsection}[1]{Section~\ref{ssb:#1}}
+
+
+% krydsrefencer %
+
+\newcommand{\refDocFigure}[1]{Figure~\ref{doc-fig:#1}~Page~\pageref{doc-fig:#1}}
+
+\newcommand{\refDokChapter}[1]{Chapter~\ref{doc-cha:#1}~Page~\pageref{doccha:#1}}
+
+\newcommand{\refDocSection}[1]{Section~\ref{doc-sec:#1}~Page~\pageref{doc-sec:#1}}
+
+\newcommand{\refDocSubSection}[1]{Section~\ref{doc-sub:#1}~Page~\pageref{doc-sub:#1}}
+
+% tabular to allow multiple rows inside one element of a table %
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+  
+\usepackage{enumitem}
+\setlist[enumerate]{topsep=-0.2cm, itemsep=-0.2cm}
+
+%\let\oldend{enumerate}=\end{enumerate}
+%\renewcommand{\end{enumerate}}{\oldend{enumerate} \vspace{7cm}}
+
+\let\Oldendenumerate\endenumerate%
+\def\endex{\Oldendenumerate \Pi}%
+  
+  
+  % user and User in textit
+  \newcommand{\user}{\textit{user} }
+  \newcommand{\User}{\textit{User} }
+  

@@ -1,0 +1,20 @@
+% Preamble
+\input{preamble/preamble_dk.tex}
+\begin{document}
+ %Frontpage
+ 
+\input{Content/Forside}
+\newpage
+\thispagestyle{empty}
+\pagenumbering{roman}
+% ToC
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+\setcounter{secnumdepth}{0} 
+\input{Content/Content.tex}
+%\addcontentsline{toc}{chapter}{References}
+\bibliography{references/bibliography}{}
+\bibliographystyle{plainnat}
+
+\end{document}
