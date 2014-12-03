@@ -17,7 +17,7 @@ public class Rectangle
 }
 \end{lstlisting}
 The bitmaps we have used is about 3 mb in size each, and it is clear that we can benefit a lot regarding memory usage if the bitmaps are shared compared to having each rectangles hold its own bitmap.
-The example code is pretty easy to understand, and is available in the appendices.
+The example code is pretty easy to understand, and is available in the appendix.
 To see how much we benefit from the flyweight pattern lets take a look at the memory consumption of 250 rectangles. One using flyweight objects which contains X and Y coordinates and a reference to the bitmap (created by a factory class).
 \lstset{language=C++}
 \begin{lstlisting}[caption=The "testrun" using flyweight]
