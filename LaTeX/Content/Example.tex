@@ -1,25 +1,11 @@
 \section{Example}
 To show how efficient code using the flyweight pattern can be compared to code not doing so, we have made a simple application, which creates rectangles containing a bitmap image in a color (red, green, or blue) and different positions (on a canvas or similar).
 
-\lstinputlisting[language=C++, firstline=5,lastline=17]{../FlyweightExample/ObjectFactory/Rectangle.cs}
+\lstinputlisting[language=C++, firstline=5,lastline=15]{../FlyweightExample/ObjectFactory/Rectangle.cs}
 The bitmaps we have used is about 3 mb in size each, and it is clear that we can benefit a lot regarding memory usage if the bitmaps are shared compared to having each rectangle hold its own bitmap.
 The example code is pretty easy to understand, and is available in the appendix.
 To see how much we benefit from the flyweight pattern lets take a look at the memory consumption of 250 rectangles. In one scenario we use flyweight objects which contains X and Y coordinates and a reference to the bitmap (created by a factory class) and in the other scenario we use normal objects containing coordinates as well as their own bitmap.
-\lstset{language=C++}
-\begin{lstlisting}[caption=The "testrun" using flyweight]
-public static void RunUsingFlyweight(int timesToRun)
-{
-	Stopwatch.Start();
-	for (int i = 0; i < timesToRun; i++)
-	{
-		var bitmap = BitmapFactory.GetBitmap((PixelColor)Random.Next(3));
-		Rectangles.Add(new Rectangle(bitmap, Random.Next(100), Random.Next(100)));
-	}
-	Stopwatch.Stop();
-	Console.WriteLine(Stopwatch.Elapsed.Milliseconds);
-	Stopwatch.Reset();
-}
-\end{lstlisting}
+\lstinputlisting[language=C++, firstline=34,lastline=47]{../FlyweightExample/ObjectFactory/Program.cs}
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.7\linewidth]{Content/Flyweight_Stats}
