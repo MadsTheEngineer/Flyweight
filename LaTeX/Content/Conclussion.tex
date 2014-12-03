@@ -1,1 +1,6 @@
 \section{Conclusion}
+The flyweight pattern only makes sense to use if there otherwise would either a very large amount of objects or if the objects created would be large.
+Flyweight is also viable in a situation where a large number of identical objects are used. This is so because instead of an expensive copy, or move operation the programmer can just copy or move a reference to said object.
+Several programming languages implement a flyweight solution for their handling of strings, called string interning.
+String interning is, among others, implemented in Java, C\# and Ruby, but not in C or C++. Ruby has a implementation that checks the length of a string and only apply the pattern for short strings, under the philosophy that long strings are unlikely to be identical, hence there could be situations where the programmer would have to implement the pattern.
+Since C and C++ does not have String interning implemented, it obviously makes sense to implement it in those languages if you work with entities that are either similar or identical.
