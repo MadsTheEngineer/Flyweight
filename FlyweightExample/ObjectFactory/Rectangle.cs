@@ -8,11 +8,9 @@ namespace ObjectFactory
         public int X { get; set; }//extrinsic
         public int Y { get; set; }//extrinsic
 
-        public Rectangle(Bitmap b,int x, int y)
+        public Rectangle(Bitmap b)
         {
             Picture = b;
-            X = x;
-            Y = y;
         }
     }
 }

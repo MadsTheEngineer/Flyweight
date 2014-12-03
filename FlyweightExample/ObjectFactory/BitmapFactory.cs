@@ -10,48 +10,48 @@ namespace ObjectFactory
         Blue
     }
 
-    public class BitmapFactory
+    public class RectangleFactory
     {
         public int ObjectsCount = 0;
-        private Dictionary<PixelColor, Bitmap> _pixelColors;
+        private Dictionary<PixelColor, Rectangle> _rectangles;
 
         public void Reset()
         {
-            _pixelColors.Clear();
+            _rectangles.Clear();
         }
 
-        public Bitmap GetBitmap(PixelColor instanceType)
+        public Rectangle GetRectangle(PixelColor instanceType)
         {
-            if (_pixelColors == null)
-                _pixelColors = new Dictionary<PixelColor, Bitmap>();
+            if (_rectangles == null)
+                _rectangles = new Dictionary<PixelColor, Rectangle>();
 
-            if (_pixelColors.ContainsKey(instanceType))
-                return _pixelColors[instanceType];
+            if (_rectangles.ContainsKey(instanceType))
+                return _rectangles[instanceType];
 
             switch (instanceType)
             {
                 case PixelColor.Red:
                     {
-                        _pixelColors.Add(instanceType, new Bitmap("../../images/red.bmp"));
+                        _rectangles.Add(instanceType, new Rectangle(new Bitmap("../../images/red.bmp")));
                         ObjectsCount++;
                         break;
                     }
 
                 case PixelColor.Green:
                     {
-                        _pixelColors.Add(instanceType, new Bitmap("../../images/green.bmp"));
+                        _rectangles.Add(instanceType, new Rectangle(new Bitmap("../../images/green.bmp")));
                         ObjectsCount++;
                         break;
                     }
 
                 case PixelColor.Blue:
                     {
-                        _pixelColors.Add(instanceType, new Bitmap("../../images/blue.bmp"));
+                        _rectangles.Add(instanceType, new Rectangle(new Bitmap("../../images/blue.bmp")));
                         ObjectsCount++;
                         break;
                     }
             }
-            return _pixelColors[instanceType];
+            return _rectangles[instanceType];
         }
     }
 }

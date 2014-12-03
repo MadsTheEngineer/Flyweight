@@ -8,7 +8,7 @@ namespace ObjectFactory
     class Program
     {
         static readonly List<Rectangle> Rectangles = new List<Rectangle>();
-        static readonly BitmapFactory BitmapFactory = new BitmapFactory();
+        static readonly RectangleFactory BitmapFactory = new RectangleFactory();
         static readonly Random Random = new Random();
         static readonly Stopwatch Stopwatch = new Stopwatch();
 
@@ -36,8 +36,10 @@ namespace ObjectFactory
             Stopwatch.Start();
             for (int i = 0; i < timesToRun; i++)
             {
-                var bitmap = BitmapFactory.GetBitmap((PixelColor)Random.Next(3));
-                Rectangles.Add(new Rectangle(bitmap, Random.Next(100), Random.Next(100)));
+                var rectangle = BitmapFactory.GetRectangle((PixelColor)Random.Next(3));
+                rectangle.X = Random.Next(100);
+                rectangle.Y = Random.Next(100);
+                Rectangles.Add(rectangle);
             }
             Stopwatch.Stop();
             Console.WriteLine(Stopwatch.Elapsed.Milliseconds);
@@ -49,7 +51,10 @@ namespace ObjectFactory
             Stopwatch.Start();
             for (int i = 0; i < timesToRun; i++)
             {
-                Rectangles.Add(new Rectangle(new Bitmap("../../images/red.bmp"), Random.Next(100), Random.Next(100)));   
+                var rectangle = new Rectangle(new Bitmap("../../images/red.bmp"));
+                rectangle.X = Random.Next(100);
+                rectangle.Y = Random.Next(100);
+                Rectangles.Add(rectangle);   
             }
             Stopwatch.Stop();
             Console.WriteLine(Stopwatch.Elapsed.Milliseconds);
